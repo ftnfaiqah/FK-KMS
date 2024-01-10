@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kiosk;
 use Illuminate\Http\Request;
-
-
-
+use Illuminate\Support\Facades\Storage;
 
 class KioskController extends Controller
 {
@@ -22,7 +20,6 @@ class KioskController extends Controller
         return view('admin.kioskDetails.listKioskForm', compact('datas'));
     }
 
-
     //return kiosk registeration page
     public function createKiosk()
     {
@@ -35,12 +32,23 @@ class KioskController extends Controller
     //store kiosk details
     public function storeKiosk(Request $request)
     {
+        // dd($request->all());
         $request->merge([
-            // 'user_id' => auth()->user()->id,
             'kiosk_status' => "Available",
-            // 'couApp_noApp' => 'CP' . date("Y") . sprintf("%'.05d\n", $CPCount + 1),
         ]);
-        Kiosk::create($request->all());
+        
+        $path = $request->file('image')->store('public/kioskimage');
+
+        $data = Kiosk::create([
+            'kiosk_name' => $request->input('kiosk_name'),
+            'kiosk_location' => $request->input('kiosk_location'),
+            'kiosk_size' => $request->input('kiosk_size'),
+            'kiosk_rent' => $request->input('kiosk_rent'),
+            'kiosk_rentDuration' => $request->input('kiosk_rentDuration'),
+            'kiosk_status' => $request->input('kiosk_status'),
+            'kiosk_img' => $path,
+        ]);
+
         return redirect()->route('kiosk.index');
     }
 
@@ -62,9 +70,34 @@ class KioskController extends Controller
     public function updateKiosk(Request $request, $application)
     {
         $data = Kiosk::find($application);
-        $data->update($request->all());
+    
+        // Check if the image is being updated
+        if ($request->hasFile('image')) {
+            // Delete the previous image if it exists
+            if ($data->kiosk_img) {
+                Storage::delete($data->kiosk_img);
+            }
+    
+            // Store the new image
+            $path = $request->file('image')->store('public/kioskimage');
+            $data->kiosk_img = $path;
+        }
+    
+        // Update other fields
+        $data->update([
+            'kiosk_name' => $request->input('kiosk_name'),
+            'kiosk_location' => $request->input('kiosk_location'),
+            'kiosk_status' => $request->input('kiosk_status'),
+            'kiosk_size' => $request->input('kiosk_size'),
+            'kiosk_rent' => $request->input('kiosk_rent'),
+            'kiosk_rentDuration' => $request->input('kiosk_rentDuration'),
+            'kiosk_status' => $request->input('kiosk_status'),
+        ]);
+    
         return redirect()->route('kiosk.index');
     }
+    
+
 
     //delete kiosk
     public function destroyKiosk($application)

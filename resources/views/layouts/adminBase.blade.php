@@ -73,7 +73,7 @@
                             <a href=""><i class="fas fa-user"></i> <span> Profile</a>
                         </li>
                         <li class="">
-                            <a href=""><i class="fas fa-file"></i> <span> Application and Approval</span></a>
+                            <a href="{{route('approval.index')}}"><i class="fas fa-file"></i> <span> Application and Approval</span></a>
                         </li>
                         <li class="nav-link">
                             <a  href="{{route('kiosk.index')}}"><i class="fas fa-shop"></i> <span> Kiosk Details</span></a>
