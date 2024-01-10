@@ -6,14 +6,14 @@
 
 
 @section('content')
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="card-header d-flex justify-content-between">
             <h6>Print Kiosk Application</h6>
         </div>
         <div class="tabcontent">
             <div style="background-color:aliceblue;width:70%;margin:auto;padding:12px">
                 <div style="text-align: center">
-                    <img src="assets/img/petakom-logo.png" alt="Logo" style="width: 20%;">
+                    <img src="{{ asset('assets/img/petakom-logo.png') }}" style="width: 20%;" alt="Logo">
                     <p><b>PETAKOM KIOSK RENTAL</b></p>
                 </div>
                 <div class="container mt-2">
@@ -21,7 +21,7 @@
                         <span>Applied Date </span>
                     </div>
                     <div class="right">
-                        <span>: </span>
+                        <span>: {{ $data->created_at->format('Y-m-d') ?? '' }}</span>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                         <span>Owner's Name </span>
                     </div>
                     <div class="right">
-                        <span>: </span>
+                        <span>: {{ $data->user->name ?? '' }}</span>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                         <span>Owner's IC Number </span>
                     </div>
                     <div class="right">
-                        <span>: </span>
+                        <span>: {{ $data->user->icNum ?? '' }}</span>
                     </div>
                 </div>
 
@@ -48,25 +48,16 @@
                         <span>Owner's Phone No. </span>
                     </div>
                     <div class="right">
-                        <span>: </span>
+                        <span>: {{ $data->user->phoneNum ?? '' }}</span>
                     </div>
                 </div>
 
                 <div class="container mt-2">
                     <div class="left">
-                        <span>Owner's Address </span>
+                        <span>Kiosk Name </span>
                     </div>
                     <div class="right">
-                        <span>: </span>
-                    </div>
-                </div>
-
-                <div class="container mt-2">
-                    <div class="left">
-                        <span>Kiosk ID </span>
-                    </div>
-                    <div class="right">
-                        <span>: </span>
+                        <span>: {{ $data->kiosk->kiosk_name ?? '' }}</span>
                     </div>
                 </div>
                 <div class="container mt-2">
@@ -74,7 +65,7 @@
                         <span>Status </span>
                     </div>
                     <div class="right">
-                        <span>: </span>
+                        <span>: {{ $data->app_status ?? '' }}</span>
                     </div>
                 </div>
             </div>
@@ -82,7 +73,8 @@
                 <button type="submit" class="btn btn-info btn-sm float-left mb-0 mt-4">Print</button>
             </div>
         </div>
-        <a href="applicationList" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray">
+        <a href="{{ route('approval.index') }}" class="btn btn-info btn-sm float-left mb-0 mt-4"
+            style="background-color: gray">
             Kembali</a>
     </div>
 @endsection
