@@ -72,7 +72,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
     Route::get('/editStatus/{application}', [ApplicationController::class, 'editStatusApp'])->name('approval.editStatus');
     Route::post('/updateStatus/{application}', [ApplicationController::class, 'updateStatusApp'])->name('approval.updateStatus');
     Route::get('/viewApp/{application}', [ApplicationController::class, 'showAppForm'])->name('approval.viewApp');
-    Route::get('/downloadApplication/{application}', [ApplicationController::class, 'downloadAppForm'])->name('approval.download');
+    Route::get('/downloadApplication/{application}', [ApplicationController::class, 'downloadApp'])->name('approval.download');
 });
 
 Route::middleware(['auth', 'user-role:technical'])->group(function () {
