@@ -3,6 +3,7 @@
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KioskController;
+use App\Models\Complaint;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,10 +32,13 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('user.index');
 
     //Manage Complaint
-    Route::get('/complaint', [ComplaintController::class, 'index'])->name('user.complaint');
-    Route::get('/complaintApplication', [ComplaintController::class, 'add'])->name('user.add');
-    Route::get('/editComplaint', [ComplaintController::class, 'edit'])->name('user.edit');
-    Route::get('/viewComplaint', [ComplaintController::class, 'show'])->name('user.show');
+    Route::get('/complaint', [ComplaintController::class, 'index'])->name('complaint.index');
+    Route::get('/complaintApplication', [ComplaintController::class, 'add'])->name('complaint.add');
+    Route::post('/storeComplaint', [ComplaintController::class, 'store'])->name('complaint.store');
+    Route::get('/editComplaint/{complaints}', [ComplaintController::class, 'edit'])->name('complaint.edit');
+    Route::post('/updateComplaint/{complaints}', [ComplaintController::class, 'update'])->name('complaint.update');
+    Route::get('/viewComplaint/{complaints}', [ComplaintController::class, 'show'])->name('complaint.show');
+    Route::post('/complaintClose/{complaints}', [ComplaintController::class, 'close'])->name('complaint.close');
 });
 
 Route::middleware(['auth', 'user-role:admin'])->group(function () {
@@ -58,12 +62,25 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 Route::middleware(['auth', 'user-role:technical'])->group(function () {
 
     //Dashboard
+<<<<<<< Updated upstream
     Route::get('/technical/home', [HomeController::class, 'technicalIndex'])->name('technical.index');
     
     //Manage Complaint
     Route::get('/technical/viewComplaintApp', [ComplaintController::class, 'showComp'])->name('technical.show');
     Route::get('/technical/printComplaint', [ComplaintController::class, 'print'])->name('technical.print');
     
+=======
+    Route::get('/technical/home', [ComplaintController::class, 'indexComp'])->name('technical.index');
+    Route::post('/technical/search', [ComplaintController::class, 'statusSearch'])->name('status.search');
+
+
+    //Manage Complaint
+    Route::get('/technical/viewComplaintApp/{complaints}', [ComplaintController::class, 'viewComp'])->name('technical.view');
+    Route::post('/technical/assignTech/{complaints}', [ComplaintController::class, 'assign'])->name('technical.assign');
+    Route::post('/technical/updateProgress/{complaints}', [ComplaintController::class, 'updateProgress'])->name('technical.progress');
+    Route::get('/technical/printComplaint/{complaints}', [ComplaintController::class, 'print'])->name('technical.print');
+
+>>>>>>> Stashed changes
 });
 
 Route::middleware(['auth', 'user-role:bursary'])->group(function () {

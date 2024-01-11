@@ -66,13 +66,14 @@
                             <a href="profile"><i class="fas fa-user"></i> <span> Profile</span></a>
                         </li>
                         <li class="nav-link">
-                            <a href=""><i class="fas fa-file"></i> <span> Application and Approval</span></a>
+                            <a href="{{route('application.index')}}"><i class="fas fa-file"></i> <span> Application and Approval</span></a>
                         </li>
                         <li class="">
                             <a href="payment"><i class="fas fa-credit-card"></i> <span> Payment</span></a>
                         </li>
+                        
                         <li class="">
-                            <a href="{{route('user.complaint')}}"><i class="fas fa-file-alt"></i><span> Complaint</span></a>
+                            <a href="{{route('complaint.index')}}"><i class="fas fa-file-alt"></i><span> Complaint</span></a>
                         </li>
                         <li class="">
                             <a href="salesReport"><i class="fa-solid fa-chart-area"></i><span> Sales Report</span></a>
