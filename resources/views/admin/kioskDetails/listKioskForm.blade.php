@@ -25,7 +25,7 @@
             <table id="myTable" class="table align-items-center mb-3 border">
                 <thead class="bg-light">
                     <tr>
-                        <th>Bil</th>
+                        <th>No</th>
                         <th>Kiosk Name</th>
                         <th>Status</th>
                         <th>Operation</th>

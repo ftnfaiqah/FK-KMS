@@ -16,15 +16,6 @@
             @csrf 
             <div class="container mt-2">
                 <div class="left">
-                    <span>Kiosk ID </span>
-                </div>
-                <div class="right">
-                    <input class="form-control" type="text" id="" name="" disabled>
-                </div>
-            </div>
-
-            <div class="container mt-2">
-                <div class="left">
                     <span>Kiosk Name </span>
                 </div>
                 <div class="right">
@@ -81,14 +72,14 @@
                 </div>
             </div>
 
-            {{-- <div class="container mt-2">
+            <div class="container mt-2">
                 <div class="left">
                     <span>Kiosk Image *</span>
                 </div>
                 <div class="right">
-                    <input type="file" id="myFiles" name="filename" multiple>
+                    <input type="file" id="myFiles" name="image" multiple>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="text-end mt-2">
                 <button type="submit" class="btn btn-info btn-sm float-left mb-0 mt-4">Save</button>
@@ -96,6 +87,6 @@
         </form>
     </div>
     <a href="{{route('kiosk.index')}}" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray">
-        Kembali</a>
+        Back</a>
 </div>
 @endsection

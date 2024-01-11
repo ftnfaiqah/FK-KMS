@@ -17,7 +17,7 @@
                     <span>Applied Date </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{ $data->created_at->format('Y-m-d') ?? '-' }}</span>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     <span>Owner's Name </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{$data->user->name}}</span>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                     <span>Owner's IC Number </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{$data->user->icNum}}</span>
                 </div>
             </div>
 
@@ -44,29 +44,37 @@
                     <span>Owner's Phone No. </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{$data->user->phoneNum}}</span>
                 </div>
             </div>
 
 
             <div class="container mt-2">
                 <div class="left">
-                    <span>Kiosk ID </span>
+                    <span>Kiosk Name </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{$data->kiosk->kiosk_name}}</span>
                 </div>
             </div>
             <div class="container mt-2">
                 <div class="left">
-                    <span>Status </span>
+                    <span>Application Status </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{$data->app_status}}</span>
+                </div>
+            </div>
+            <div class="container mt-2">
+                <div class="left">
+                    <span>Kiosk Image </span>
+                </div>
+                <div class="right">
+                    <span> <img src={{Storage::url( $data->kiosk->kiosk_img)}} style="width:200px;height:200px;"></span>
                 </div>
             </div>
         </div>
-        <a href="applicationStatus" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray;  border: 1px solid gray;">
-            Kembali</a>
+        <a href="{{route('application.index')}}" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray;  border: 1px solid gray;">
+            Back</a>
     </div>
 @endsection

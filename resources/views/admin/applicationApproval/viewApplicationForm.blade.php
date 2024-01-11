@@ -17,7 +17,7 @@
                     <span>Applied Date </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{ $data->created_at->format('Y-m-d') ?? '' }}</span>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     <span>Owner's Name </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{ $data->user->name ?? '' }}</span>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                     <span>Owner's IC Number </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{ $data->user->icNum ?? '' }}</span>
                 </div>
             </div>
 
@@ -44,16 +44,16 @@
                     <span>Owner's Phone No. </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{ $data->user->phoneNum ?? '' }}</span>
                 </div>
             </div>
 
             <div class="container mt-2">
                 <div class="left">
-                    <span>Kiosk ID </span>
+                    <span>Kiosk Name </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{ $data->kiosk->kiosk_name ?? '' }}</span>
                 </div>
             </div>
             <div class="container mt-2">
@@ -61,7 +61,7 @@
                     <span>Status </span>
                 </div>
                 <div class="right">
-                    <span>: </span>
+                    <span>: {{ $data->app_status ?? '' }}</span>
                 </div>
             </div>
 
@@ -69,7 +69,7 @@
                 <button type="submit" class="btn btn-info btn-sm float-left mb-0 mt-4">Save</button>
             </div>
         </div>
-        <a href="applicationList" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray">
-            Kembali</a>
+        <a href="{{ route('approval.index') }}" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray">
+            Back</a>
     </div>
 @endsection

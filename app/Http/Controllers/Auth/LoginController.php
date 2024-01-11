@@ -53,7 +53,7 @@ class LoginController extends Controller
             // Check the role of the authenticated user
             if (auth()->user()->role == 'admin') {
                 // Redirect to the admin home page if the user is an admin
-                return redirect()->route('admin.index');
+                return redirect()->route('approval.index');
             } 
 
             else if(auth()->user()->role == 'technical')
@@ -75,7 +75,7 @@ class LoginController extends Controller
             
             else {
                 // Redirect to the regular user home page for non-admin users
-                return redirect()->route('user.index');
+                return redirect()->route('application.index');
             }
 
         } 

@@ -12,52 +12,53 @@
         <br><br>
         <p><b>Kiosk Owners Details</b></p>
         <div class="tabcontent">
-       
-            <form action="">
+            <form role="form" method="POST" action={{ route('application.store') }} enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="id" value="{{ $userWithApplications->id }}">
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col">
                         <span>Owner's Name*</span>
-                        <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                        <input type="text" class="form-control" placeholder="Applicant's Name" aria-label="name"
+                            value="{{ $userWithApplications->name }}" readonly>
                     </div>
                     <div class="col">
                         <span>Owner's IC Number*</span>
-                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                        <input type="text" class="form-control" placeholder="Applicant's IC Number" aria-label="icNum"
+                            value="{{ $userWithApplications->icNum }}" readonly>
                     </div>
-                </div>
                     <div class="col">
                         <span>Owner's Phone No.*</span>
-                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                        <input type="text" class="form-control" placeholder="Applicant's Phone Number"
+                            aria-label="phoneNum" value="{{ $userWithApplications->phoneNum }}" readonly>
                     </div>
                 </div>
-            </form>
         </div>
         <br><br>
         <p><b>Kiosk Owners Details</b></p>
         <div class="tabcontent">
-   
-                <form action="">
-                    @csrf
-                    <div class="row" style="margin-bottom: 20px">
-                        <div class="col">
-                            <span><b>Choose Kiosk *</b></span>
-                                <select class="form-select" name="" style="width: 50%;">
-                                    <option selected></option>
-                                    <option value="On Processed">Kiosk 1</option>
-                                    <option value="On Processed">Kiosk 2</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="text-end mt-2">
-                        <button type="reset" class="btn btn-info btn-sm float-left mb-0 mt-4">Reset</button>
-                        <button type="submit" class="btn btn-info btn-sm float-left mb-0 mt-4">Save</button>
-                        <button type="submit" class="btn btn-info btn-sm float-left mb-0 mt-4">Submit</button>
-                    </div>
-                </form>
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col">
+                    <span><b>Choose Kiosk *</b></span>
+                    <select class="form-select" name="kiosk_id" style="width: 50%;">
+                        <option selected></option>
+                        @foreach ($kiosks as $kiosk)
+                            @if ($kiosk->kiosk_status == 'Available')
+                                <option value="{{ $kiosk->kiosk_ID }}">{{ $kiosk->kiosk_name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
-        <a href="applicationStatus" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray;  border: 1px solid gray;">
-            Kembali</a>
+
+        <div class="text-end mt-2">
+            <button type="reset" class="btn btn-info btn-sm float-left mb-0 mt-4">Reset</button>
+            <button type="submit" class="btn btn-info btn-sm float-left mb-0 mt-4">Save</button>
+        </div>
+
+        </form>
+        <a href="{{ route('application.index') }}" class="btn btn-info btn-sm float-left mb-0 mt-4"
+            style="background-color: gray;  border: 1px solid gray;">
+            Back</a>
     </div>
 @endsection

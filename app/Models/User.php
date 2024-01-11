@@ -21,6 +21,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'icNum',
+        'phoneNum',
         'email',
         'password',
         'role',
@@ -46,12 +48,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected function role():Attribute
+    protected function role(): Attribute
     {
         return new Attribute(
-            get : fn($value) => ["user", "admin", "technical", "bursary", "pupuk" ][$value],
+            get: fn ($value) => ["user", "admin", "technical", "bursary", "pupuk"][$value],
         );
     }
 
-
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'user_ID');
+    }
 }
