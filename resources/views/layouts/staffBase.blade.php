@@ -63,18 +63,27 @@
                             <i class="fas fa-home"></i> <span> Menu</span>
                         </li>
                         <hr>
+
                         <li class="">
-                            <a href="staffProfile"><i class="fas fa-user"></i> <span> Profile</span></a>
+                            <a href=""><i class="fas fa-user"></i> <span> Profile</span></a>
                         </li>
-                        <li class="">
-                            <a href="staffPayment"><i class="fas fa-credit-card"></i> <span> Payment</span></a>
-                        </li>
+
+                        @if (auth()->user()->role == "technical")
                         <li class="menu active">
-                            <a href="{{route('technical.index')}}"><i class="fas fa-file-alt"></i><span> Complaint</span></a>
+                            <a href="{{route('technical.index' )}}"><i class="fas fa-file-alt"></i><span> Complaint</span></a>
                         </li>
+
+                        @elseif (auth()->user()->role == "bursary")
+                        <li class="">
+                            <a href=""><i class="fas fa-credit-card"></i> <span> Payment</span></a>
+                        </li>
+
+                        @else
+                        
                         <li class="">
                             <a href="staffSalesReport"><i class="fa-solid fa-chart-area"></i><span> Sales Report</span></a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

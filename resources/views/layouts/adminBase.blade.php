@@ -78,12 +78,7 @@
                         <li class="nav-link">
                             <a  href="{{route('kiosk.index')}}"><i class="fas fa-shop"></i> <span> Kiosk Details</span></a>
                         </li>
-                        <li class="">
-                            <a href=""><i class="fas fa-file-alt"></i><span> Complaint</span></a>
-                        </li>
-                        <li class="">
-                            <a href=""><i class="fa-solid fa-chart-area"></i><span> Sales Report</span></a>
-                        </li>
+                      
                     </ul>
                 </div>
             </div>

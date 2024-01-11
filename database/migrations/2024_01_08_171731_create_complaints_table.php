@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cmp_category')->nullable();
             $table->string('cmp_evidence')->nullable();
             $table->string('cmp_remark')->nullable();
-            $table->string('cmp_status')->nullable();
+            $table->string('cmp_status')->default('Open');
             $table->string('cmp_assignTech')->nullable();
             $table->string('cmp_progress')->nullable();
             $table->timestamps();
