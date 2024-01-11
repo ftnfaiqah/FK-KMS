@@ -654,7 +654,7 @@ a.bg-primary:focus,
 a.bg-primary:hover,
 button.bg-primary:focus,
 button.bg-primary:hover {
-    background-color: #18aefa !important;
+    background-color: #318DFF !important;
 }
 
 .bg-success,
@@ -676,12 +676,12 @@ button.bg-success:hover {
 
 .pro-bg-info,
 .badge-info {
-    background-color: #56dccc !important;
+    background-color:#318DFF !important;
 }
 
 .pro-bg-light,
 .badge-light {
-    background-color: #18aefa !important;
+    background-color: #318DFF !important;
 }
 
 a.bg-info:focus,

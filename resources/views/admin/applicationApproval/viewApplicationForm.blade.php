@@ -70,6 +70,6 @@
             </div>
         </div>
         <a href="{{ route('approval.index') }}" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray">
-            Kembali</a>
+            Back</a>
     </div>
 @endsection

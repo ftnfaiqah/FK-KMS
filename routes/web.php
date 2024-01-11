@@ -39,9 +39,9 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
     Route::post('/updateApplication/{application}', [ApplicationController::class, 'updateApp'])->name('application.updateApp');
     Route::get('/viewApplication/{application}', [ApplicationController::class, 'showApp'])->name('application.viewApp');
     Route::get('/deleteApplication/{application}', [ApplicationController::class, 'destroyApp'])->name('application.destroyApp');
-    Route::get('/printApplication/{application}', [ApplicationController::class, 'printApp'])->name('application.printApp');
-    Route::get('/downloadApplication/{application}', [ApplicationController::class, 'downloadApp'])->name('application.download');
+    Route::get('/printApplication/{application}', [ApplicationController::class, 'downloadApp'])->name('application.printApp');
     Route::get('/kioskAvailability', [ApplicationController::class, 'showListKiosk'])->name('application.availability');
+
 
 
     //Manage Complaint
@@ -72,7 +72,7 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
     Route::get('/editStatus/{application}', [ApplicationController::class, 'editStatusApp'])->name('approval.editStatus');
     Route::post('/updateStatus/{application}', [ApplicationController::class, 'updateStatusApp'])->name('approval.updateStatus');
     Route::get('/viewApp/{application}', [ApplicationController::class, 'showAppForm'])->name('approval.viewApp');
-    Route::get('/printApp/{application}', [ApplicationController::class, 'printAppForm'])->name('approval.printApp');
+    Route::get('/downloadApplication/{application}', [ApplicationController::class, 'downloadAppForm'])->name('approval.download');
 });
 
 Route::middleware(['auth', 'user-role:technical'])->group(function () {

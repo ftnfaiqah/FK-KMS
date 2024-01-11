@@ -7,8 +7,7 @@ use App\Models\Kiosk;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Barryvdh\DomPDF\Facade as PDF;
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
@@ -119,29 +118,14 @@ class ApplicationController extends Controller
         return redirect()->route('application.index');
     }
 
-    //display print page
-    public function printApp($application)
-    {
-        $data = Application::find($application);
-        return view('kioskParticipants/applicationApproval/printApplicationForm', compact('data'));
-    }
-
     //download application
     public function downloadApp($application)
     {
         $data = Application::find($application);
-
-        // Generate PDF content
-        $pdf = new FacadePdf(['orientation' => 'portrait', 'margin-top' => 10]); // Adjust the configuration as needed
-        $pdf->loadView('kioskParticipants/applicationApproval/printApplicationForm', compact('data'));
-        $pdfContent = $pdf->output();
-
-        // Store the PDF in storage
-        $filename = 'application_form.pdf';
-        Storage::put($filename, $pdfContent);
-
+        $pdf = PDF::loadview('kioskParticipants/applicationApproval/downloadApplicationForm', compact('data'));
+ 
         // Return the PDF for download
-        return response()->download(storage_path($filename));
+        return $pdf->download('Kiosk_Application.pdf');
     }
 
     //show kiosk list availability
@@ -202,10 +186,4 @@ class ApplicationController extends Controller
         return view('admin/applicationApproval/viewApplicationForm', compact('data'));
     }
 
-    //display print page
-    public function printAppForm($application)
-    {
-        $data = Application::find($application);
-        return view('admin/applicationApproval/printApplicationForm', compact('data'));
-    }
 }
