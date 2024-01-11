@@ -21,7 +21,7 @@
                 <table id="myTable" class="table align-items-center mb-3 border">
                     <thead class="bg-light">
                         <tr>
-                            <th>Bil</th>
+                            <th>No</th>
                             <th>Owner's Name</th>
                             <th>Kiosk's Name</th>
                             <th>Applied Date</th>
@@ -49,10 +49,12 @@
                                                 @if ($data->app_status != 'Pending') style="pointer-events: none; color: grey;" @endif>
                                                 <i class="fas fa-trash" style="padding-right:15px;color:{{ $data->app_status == 'Pending' ? 'red' : 'grey' }}"></i>
                                              </a>
+                                             
                                              <a href="{{ route('application.printApp', ['application' => $data['app_ID']]) }}"
-                                                @if ($data->app_status != 'Rejected' && $data->app_status != 'Approved') style="pointer-events: none; color: grey;" @endif>
+                                                @if ($data->app_status != 'Rejected' && $data->app_status != 'Approved' && $data->app_status != 'On Processed') style="pointer-events: none; color: grey;" @endif>
                                                 <i class="fas fa-download" style="padding-right:15px;color:{{ $data->app_status == 'Pending' ? 'black' : 'grey' }}k"></i>
-                                             </a>
+                                            </a>
+                                            
                                 </td>
                             </tr>
                             <tr style="display:none"></tr>

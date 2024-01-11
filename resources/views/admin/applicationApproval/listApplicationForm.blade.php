@@ -27,7 +27,7 @@
                                 <option value="Approved">Approved</option>
                                 <option value="Rejected">Rejected</option>
                             </select>
-                            <button type="submit" class="btn btn-info btn-sm float-right mb-0 mt-4">Save</button>
+                            <button type="submit" class="btn btn-info btn-sm float-right mb-0 mt-4">Search</button>
                         </div>
                     </div>
                     <div>
@@ -42,7 +42,7 @@
             <table id="myTable" class="table align-items-center mb-3 border">
                 <thead class="bg-light">
                     <tr>
-                        <th>Bil</th>
+                        <th>No</th>
                         <th>Application ID</th>
                         <th>Owner's Name</th>
                         <th>Applied Date</th>
@@ -72,7 +72,7 @@
                                 <a href="{{ route('approval.viewApp', ['application' => $list['app_ID']]) }}"><i
                                         class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
 
-                                <a href="{{ route('approval.printApp', ['application' => $list['app_ID']]) }}"
+                                <a href="{{ route('approval.download', ['application' => $list['app_ID']]) }}"
                                     @if ($list->app_status == 'Pending' || $list->app_status == 'On Progress') style="pointer-events: none; color: grey;" @endif>
                                     <i class="fas fa-download"
                                         style="padding-right:15px;color:{{ $list->app_status == 'Approved' || $list->app_status == 'Rejected' ? 'black' : 'grey' }}"></i>

@@ -57,15 +57,6 @@
                 </div>
             </div>
 
-            {{-- <div class="container mt-2">
-                <div class="left">
-                    <span>Kiosk Image </span>
-                </div>
-                <div class="right">
-                    <span>: </span>
-                </div>
-            </div> --}}
-
             <div class="container mt-2">
                 <div class="left">
                     <span>Kiosk Status </span>
@@ -86,6 +77,6 @@
             </div>
         </div>
         <a href="{{route('kiosk.index')}}" class="btn btn-info btn-sm float-left mb-0 mt-4" style="background-color: gray">
-            Kembali</a>
+            Back</a>
     </div>
 @endsection
