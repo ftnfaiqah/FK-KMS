@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div id="defaultOpen">
             <div class="table-responsive p-0">
-                <a href="{{ route('complaint.add') }}" class="btn btn-info btn-sm float-end mb-4 mt-4"> Add</a>
+                <a href="{{ route('user.add') }}" class="btn btn-info btn-sm float-end mb-4 mt-4"> Add</a>
 
                 <table id="myTable" class="table align-items-center mb-3 border">
                     <thead class="bg-light">

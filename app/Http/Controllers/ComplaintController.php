@@ -2,49 +2,33 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Application;
 use App\Models\Complaint;
 use App\Models\Kiosk;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< Updated upstream
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Storage;
-=======
->>>>>>> Stashed changes
 
 class ComplaintController extends Controller
 {
     //User
-
-    //display complaint application list page
     public function index()
     {
         $userId = Auth::id();
         $complaints = Complaint::with('user')->where('user_ID', $userId)->get();
-<<<<<<< Updated upstream
-        
-
-=======
->>>>>>> Stashed changes
-
         return view('kioskParticipants.complaint.complaintStatusForm', compact('complaints'));
     }
 
+
+
+    //display complaint application list page
+   
     //display complaint form page
     public function add()
     {
-<<<<<<< Updated upstream
-        $userId = Auth::id();
-
-        // Retrieve the user's applications along with user and kiosk data
-        $application = Application::with(['user', 'kiosk'])
-            ->where('user_ID', $userId)
-            ->first();
-
-        return view('kioskParticipants.complaint.complaintApplicationForm', compact('userId', 'application'));
-=======
         //retrieve user data
         $userId = Auth::id();
         $application = Application::with('user')->where('user_ID', $userId)->get();
@@ -54,7 +38,6 @@ class ComplaintController extends Controller
 
 
         return view('kioskParticipants.complaint.complaintApplicationForm', compact('application'));
->>>>>>> Stashed changes
     }
 
     //store complaints details into database

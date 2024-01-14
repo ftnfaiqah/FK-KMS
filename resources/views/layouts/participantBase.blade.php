@@ -73,7 +73,7 @@
                         </li>
                         
                         <li class="">
-                            <a href="{{route('complaint.index')}}"><i class="fas fa-file-alt"></i><span> Complaint</span></a>
+                            <a href="{{route('user.index')}}"><i class="fas fa-file-alt"></i><span> Complaint</span></a>
                         </li>
                         <li class="">
                             <a href="salesReport"><i class="fa-solid fa-chart-area"></i><span> Sales Report</span></a>

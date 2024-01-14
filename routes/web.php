@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KioskController;
-use App\Models\Complaint;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ComplaintController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,13 +46,17 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
 
 
     //Manage Complaint
-    Route::get('/complaint', [ComplaintController::class, 'index'])->name('complaint.index');
-    Route::get('/complaintApplication', [ComplaintController::class, 'add'])->name('complaint.add');
-    Route::post('/storeComplaint', [ComplaintController::class, 'store'])->name('complaint.store');
-    Route::get('/editComplaint/{complaints}', [ComplaintController::class, 'edit'])->name('complaint.edit');
-    Route::post('/updateComplaint/{complaints}', [ComplaintController::class, 'update'])->name('complaint.update');
-    Route::get('/viewComplaint/{complaints}', [ComplaintController::class, 'show'])->name('complaint.show');
-    Route::post('/complaintClose/{complaints}', [ComplaintController::class, 'close'])->name('complaint.close');
+    Route::get('/complaint', [ComplaintController::class, 'index'])->name('user.index');
+    Route::get('/complaintApplication', [ComplaintController::class, 'add'])->name('user.add');
+    Route::get('/editComplaint', [ComplaintController::class, 'edit'])->name('user.edit');
+    Route::get('/viewComplaint', [ComplaintController::class, 'show'])->name('user.show');
+ 
+
+    //Manage Payment
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::get('/viewParticipantPaymentDetails', [PaymentController::class, 'viewParticipantPaymentDetails']) ->name('payment.index');
+    Route::get('/makePayment/{payment}', [PaymentController::class, 'makePayment'])->name('payment.makePayment');
+    Route::get('/viewReceiptDetails/{payment}', [PaymentController::class, 'viewReceiptDetails']) ->name('payment.viewReceiptDetails');
 });
 
 Route::middleware(['auth', 'user-role:admin'])->group(function () {
@@ -82,23 +86,23 @@ Route::middleware(['auth', 'user-role:admin'])->group(function () {
 Route::middleware(['auth', 'user-role:technical'])->group(function () {
 
     //Dashboard
-    Route::get('/technical/home', [ComplaintController::class, 'indexComp'])->name('technical.index');
-    Route::post('/technical/search', [ComplaintController::class, 'statusSearch'])->name('status.search');
-
+    Route::get('/technical/home', [HomeController::class, 'technicalIndex'])->name('technical.index');
 
     //Manage Complaint
-    Route::get('/technical/viewComplaintApp/{complaints}', [ComplaintController::class, 'viewComp'])->name('technical.view');
-    Route::post('/technical/assignTech/{complaints}', [ComplaintController::class, 'assign'])->name('technical.assign');
-    Route::post('/technical/updateProgress/{complaints}', [ComplaintController::class, 'updateProgress'])->name('technical.progress');
-    Route::get('/technical/printComplaint/{complaints}', [ComplaintController::class, 'print'])->name('technical.print');
-
+    Route::get('/technical/viewComplaintApp', [ComplaintController::class, 'showComp'])->name('technical.show');
+    Route::get('/technical/printComplaint', [ComplaintController::class, 'print'])->name('technical.print');
 });
-
 
 Route::middleware(['auth', 'user-role:bursary'])->group(function () {
 
     //Dashboard
-    Route::get('/bursary/home', [HomeController::class, 'bursaryIndex'])->name('bursary.index');
+    Route::get('/bursary/home', [PaymentController::class, 'bursaryIndex'])->name('bursary.index');
+    Route::get('/approve-payment/{bursary_id}', [PaymentController::class, 'approvepayment'])->name('approvepayment');
+    Route::get('/reject-payment/{bursary_id}', [PaymentController::class, 'rejectpayment'])->name('rejectpayment');
+    Route::get('/generate-receipt/{bursary_id}', [PaymentController::class, 'generatereceipt'])->name('generatereceipt');
+    Route::get('/view-paid-receipt/{bursary_id}', [PaymentController::class, 'viewpaidreceipt'])->name('viewpaidreceipt');
+    Route::get('/view-participant-payment/{bursary_id}', [PaymentController::class, 'viewparticipantpayment'])->name('viewparticipantpayment');
+    Route::get('/view-payment-details/{bursary_id}', [PaymentController::class, 'viewpaymentdetails'])->name('viewpaymentdetails');
 });
 
 Route::middleware(['auth', 'user-role:pupuk'])->group(function () {
