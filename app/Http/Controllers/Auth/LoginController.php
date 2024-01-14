@@ -63,7 +63,7 @@ class LoginController extends Controller
 
             else if(auth()->user()->role == 'bursary')
             {
-                return redirect()->route('bursary.index');
+                return redirect()->route('bursary.index1');
 
             }
 

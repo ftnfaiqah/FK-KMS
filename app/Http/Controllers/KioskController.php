@@ -91,7 +91,6 @@ class KioskController extends Controller
             'kiosk_size' => $request->input('kiosk_size'),
             'kiosk_rent' => $request->input('kiosk_rent'),
             'kiosk_rentDuration' => $request->input('kiosk_rentDuration'),
-            'kiosk_status' => $request->input('kiosk_status'),
         ]);
     
         return redirect()->route('kiosk.index');

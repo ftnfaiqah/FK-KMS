@@ -21,35 +21,23 @@ class PaymentController extends Controller
         // Pass the data to the view
         return view('kioskParticipants.payment.viewParticipantPaymentDetails', compact('datas'));
     }
-    //kiosk participant make payment
 
-    public function makePayment(Request $request)
+    public function index2()
     {
-        $file = $request->file('file');
+        // Fetch the data from the database
+        $datas = Payment::all();
 
-
-        if (!empty($file)) {
-            $rules = array('file' => 'required|mimes:png,jpeg,jpg,gif');
-            $validator = Validator::make(array('file' => $file), $rules);
-
-            if ($validator->passes()) {
-                $destinationPath = 'uploads';
-                $filename = $file->getClientOriginalName();
-                $upload_success = $file->move($destinationPath, $filename);
-
-                if ($upload_success) {
-                    // Save file to database or process it here.
-                    return Response::json('success', 200);
-                } else {
-                    return Response::json('error', 400);
-                }
-            } else {
-                return Response::json('error', 400);
-            }
-        } else {
-            return Response::json('error', 400);
-        }
+        // Pass the data to the view
+        return view('kioskParticipants.payment.receiptKiosk');
     }
+
+    //kiosk participant make payment
+    public function makePayment($payment)
+{
+    $data = Payment::All()->find($payment); 
+    return view('kioskParticipants.payment.makePayment', compact('data'));
+}
+   
 
     //kiosk participant view payment details
     public function viewPaymentDetails()
@@ -58,13 +46,20 @@ class PaymentController extends Controller
         $payment = $user->payment;
         return view('viewPaymentDetails', compact('payment'));
     }
-    //kisok participant view receipt
-    public function viewReceipt()
+
+    //kiosk participant view receipt
+    public function viewReceiptDetails($payment)
     {
-        $user = Auth::user();
-        $payment = $user->payment;
-        return view('viewReceipt', compact('payment'));
+        $data = Payment::All()->find($payment); 
+    return view('kioskParticipants.payment.viewReceiptDetails', compact('data'));
     }
+
+    public function receiptKiosk($payment)
+    {
+        $data = Payment::All()->find($payment); 
+    return view('kioskParticipants.payment.receiptKiosk', compact('data'));
+    }
+
     //kiosk participant print receipt
     public function printReceipt()
     {
@@ -72,19 +67,23 @@ class PaymentController extends Controller
         $payment = $user->payment;
         return view('printReceipt', compact('payment'));
     }
+
+
     //fk bursary approve the payment
     public function approvePayment(Payment $payment)
     {
         $payment->update(['payment_status' => 'Approved']);
         return redirect()->route('viewParticipantPayment');
     }
+
     //fk bursary reject payment
     public function rejectPayment($payment_ID)
-{
-    $payment = Payment::find($payment_ID);
-    $payment->update(['status' => 'Rejected']);
-    return redirect()->route('viewPaymentDetails', ['id' => $payment->payment_ID]);
-}
+    {
+        $payment = Payment::find($payment_ID);
+        $payment->update(['status' => 'Rejected']);
+        return redirect()->route('viewPaymentDetails', ['id' => $payment->payment_ID]);
+    }
+
     //fk bursary generate receipt
     public function generateReceipt($payment_ID)
     {
@@ -92,20 +91,16 @@ class PaymentController extends Controller
         $payment->update(['status' => 'Paid']);
         return view('viewReceipt', compact('payment'));
     }
-   
-   //fk bursary to view participant payment
-   public function viewParticipantPayment($payment_ID)
-   {
-       $participant = User::find($payment_ID);
-       $payments = Payment::where('user_ID', $participant->payment_ID)->get();
-       return view('viewParticipantPayment', compact('payments'));
-   }
-   //fk bursary view participant details
-   public function viewParticipantPaymentDetails($user_ID)
-   {
-    $users = User::all();
 
-    return view('index', compact('users'));
-   }
-   
+    //fk bursary to view participant payment
+    public function viewParticipantPayment($payment_ID)
+    {
+        $participant = User::find($payment_ID);
+        $payments = Payment::where('user_ID', $participant->payment_ID)->get();
+        return view('viewParticipantPayment', compact('payments'));
+    }
+
+
+
+
 }

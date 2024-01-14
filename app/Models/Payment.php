@@ -20,8 +20,15 @@ class Payment extends Model
     'payment_date'
     ]; 
 
-    public function application()
+    public function user()
     {
         return $this->belongsTo(User::class, 'app_ID');
+    }
+
+    public function kiosk()
+    {
+        // Assuming you have a direct relationship between Payment and Kiosk
+        // Adjust this based on your actual relationship
+        return $this->belongsTo(Kiosk::class, 'kiosk_id');
     }
 }

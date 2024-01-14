@@ -50,13 +50,17 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
     Route::get('/complaintApplication', [ComplaintController::class, 'add'])->name('user.add');
     Route::get('/editComplaint', [ComplaintController::class, 'edit'])->name('user.edit');
     Route::get('/viewComplaint', [ComplaintController::class, 'show'])->name('user.show');
+    Route::get('/viewComplaint', [ComplaintController::class, 'show'])->name('complaint.store');
  
 
     //Manage Payment
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::get('/payment/{id}', [PaymentController::class, 'index2'])->name('payment.index2');
     Route::get('/viewParticipantPaymentDetails', [PaymentController::class, 'viewParticipantPaymentDetails']) ->name('payment.index');
     Route::get('/makePayment/{payment}', [PaymentController::class, 'makePayment'])->name('payment.makePayment');
     Route::get('/viewReceiptDetails/{payment}', [PaymentController::class, 'viewReceiptDetails']) ->name('payment.viewReceiptDetails');
+    Route::get('/receiptKiosk/{payment}', [PaymentController::class, 'receiptKiosk'])->name('kioskParticipants.payment.receiptKiosk');
+
 });
 
 Route::middleware(['auth', 'user-role:admin'])->group(function () {
